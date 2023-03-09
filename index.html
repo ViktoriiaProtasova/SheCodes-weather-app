@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/660d72a753.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <time id="time">1:41</time>
+        <div>
+          <i class="fa-solid fa-signal"></i>
+          <i class="fa-solid fa-wifi"></i>
+          <i class="fa-solid fa-battery-three-quarters"></i>
+        </div>
+      </header>
+      <main>
+        <form class="search-form" id="search-form">
+          <input
+            type="text"
+            name="city"
+            placeholder="Type a city.."
+            autocomplete="off"
+            autofocus
+            class="search-field"
+            id="search-text-field"
+          />
+          <input type="image" src="./images/search.png" class="form-control" />
+        </form>
+        <h1 id="city">City</h1>
+        <div class="icon-wrapper">
+          <i class="fa-solid fa-location-dot city-icon"></i>
+          <i class="fa-solid fa-location-pin city-icon is-pin"></i>
+        </div>
+        <p class="degrees">
+          <span class="temperature">n/a </span
+          ><span class="units"
+            ><a href="#" id="celsius-link">&#186;C</a> |
+            <a href="#" id="fahrenheit-link">&#186;F</a></span
+          >
+        </p>
+        <p class="date" id="date">Today is..</p>
+        <p class="weather-desc" id="temperature-description">Mostly Clear</p>
+        <div class="temp-range">
+          <p class="max">H : n/a&#176;</p>
+          <p class="min">L : n/a&#176;</p>
+        </div>
+        <img
+          src="./images/na.png"
+          alt="Weather picture"
+          class="picture animate__animated animate__zoomIn"
+          id="image"
+        />
+      </main>
+      <footer class="footer-wrapper">
+        <ul class="type-of-forecast">
+          <li>Hourly Forcast</li>
+          <li>Weekly Forcast</li>
+        </ul>
+        <ul class="time-list">
+          <li class="time-item">
+            <p>12 AM</p>
+            <p>19&#176;</p>
+          </li>
+          <li class="time-item">
+            <p>Now</p>
+            <p>19&#176;</p>
+          </li>
+          <li class="time-item">
+            <p>2 AM</p>
+            <p>18&#176;</p>
+          </li>
+          <li class="time-item">
+            <p>3 AM</p>
+            <p>19&#176;</p>
+          </li>
+          <li class="time-item">
+            <p>4 AM</p>
+            <p>19&#176;</p>
+          </li>
+        </ul>
+      </footer>
+    </div>
+    <script src="./src/index.js"></script>
+  </body>
+</html>
