@@ -2,7 +2,7 @@ body {
   margin: 0 auto;
   color: aliceblue;
   font-family: "Montserrat", sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.5;
 }
 header {
@@ -18,8 +18,8 @@ p {
   margin: 0;
 }
 h1 {
-  font-size: 36px;
-  margin-bottom: 16px;
+  font-size: 32px;
+  margin-bottom: 12px;
 }
 ul {
   padding-left: 0;
@@ -104,7 +104,7 @@ img {
   display: inline-block;
 }
 .city-icon {
-  font-size: 3rem;
+  font-size: 2rem;
   visibility: visible;
   opacity: 1;
   transform: scale(1);
@@ -119,10 +119,10 @@ img {
   transform: scaleX(1.02);
 }
 .temperature {
-  font-size: 24px;
+  font-size: 18px;
 }
 .degrees {
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   font-size: 48px;
   line-height: 1.11;
 }
@@ -133,10 +133,9 @@ img {
   font-size: 1rem;
 }
 .date,
-.weather-desc,
-.repo-link {
+.weather-desc {
   color: rgba(240, 248, 255, 0.6);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 .weather-desc {
   font-size: 0.9rem;
@@ -150,7 +149,7 @@ img {
   font-weight: bold;
 }
 .picture {
-  max-width: 120px;
+  max-width: 80px;
   margin: 0 auto 8px;
   animation: zoomIn;
   animation-duration: 5000ms;
@@ -161,7 +160,7 @@ img {
   align-items: center;
   padding: 16px;
   border-bottom: 3px solid rgba(60, 16, 83, 0.4);
-  font-size: 0.95rem;
+  font-size: 0.8rem;
 }
 .footer-wrapper {
   padding: 8px;
@@ -189,13 +188,13 @@ img {
 }
 .time-item {
   flex-basis: calc((100% - 8px) / 5);
-  height: 120px;
+  min-height: 100px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   padding: 8px;
   font-size: 16px;
-  border: 1px solid rgba(60, 16, 83, 0.4);
+  /* border: 1px solid rgba(60, 16, 83, 0.4); */
   border-radius: 50%;
   -webkit-box-shadow: 3px -2px 4px 0px #3c1053;
   -moz-box-shadow: 3px -2px 4px 0px #3c1053;
@@ -215,6 +214,9 @@ img {
   .time-item:is(:hover, :focus) {
     font-size: 0.8rem;
   }
+}
+.repo-link {
+  color: rgba(240, 248, 255, 0.6);
 }
 .autor-data {
   font-size: 0.8rem;
