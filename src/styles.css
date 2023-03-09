@@ -1,0 +1,215 @@
+body {
+  margin: 0 auto;
+  color: aliceblue;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+h1 {
+  font-size: 36px;
+  margin-bottom: 8px;
+}
+ul {
+  padding-left: 0;
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+img {
+  display: block;
+}
+
+.underline {
+  text-decoration: underline;
+}
+.container {
+  display: flex;
+  max-width: 480px;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px 16px 0 16px;
+  margin: 0 auto;
+  text-align: center;
+  background: #ad5389; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3c1053,
+    #ad5389
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3c1053,
+    #ad5389
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.search-form {
+  position: relative;
+  width: 90%;
+  height: 45px;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 16px;
+  transform: scale(1);
+  transform-origin: bottom left;
+  transition: transform 250ms linear;
+}
+.search-field {
+  width: 100%;
+  padding: 8px 16px;
+  color: #4f4e50;
+  border: 1px solid rgba(60, 16, 83, 0.4);
+  -webkit-box-shadow: 3px -1px 4px 0px #3c1053;
+  -moz-box-shadow: 3px -1px 4px 0px #3c1053;
+  box-shadow: 3px -1px 4px 0px #3c1053;
+  border-radius: 4px;
+}
+.search-field::placeholder {
+  font-size: 0.9rem;
+  font-family: "Montserrat", sans-serif;
+}
+.form-control {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(-50%, 50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  opacity: 0.75;
+}
+.search-form:is(:hover, :focus) {
+  /* transform: translate(0.7px, -0.7px); */
+  transform: scale(1.02);
+}
+.margin {
+  margin-bottom: 78px;
+}
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+.city-icon {
+  font-size: 64px;
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1);
+  cursor: pointer;
+}
+.is-pin {
+  position: absolute;
+  transform: translateX(-50%);
+  opacity: 0;
+}
+.city-icon:hover {
+  transform: scaleX(1.02);
+}
+.temperature {
+  font-size: 24px;
+}
+.degrees {
+  margin-bottom: 16px;
+  font-size: 72px;
+  line-height: 1.11;
+}
+.units {
+  display: none;
+  position: relative;
+  top: -34px;
+  font-size: 1rem;
+}
+.date,
+.weather-desc {
+  color: rgba(240, 248, 255, 0.6);
+  margin-bottom: 8px;
+}
+.weather-desc {
+  font-size: 0.9rem;
+}
+.temp-range {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.picture {
+  min-width: 75px;
+  margin: 0 auto;
+  animation: zoomIn;
+  animation-duration: 5000ms;
+}
+.type-of-forecast {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 3px solid rgba(60, 16, 83, 0.4);
+}
+.footer-wrapper {
+  padding: 8px;
+  border-top-right-radius: 15%;
+  border-top-left-radius: 15%;
+  -webkit-box-shadow: 3px -2px 4px 0px #3c1053;
+  -moz-box-shadow: 3px -2px 4px 0px #3c1053;
+  box-shadow: 3px -2px 4px 0px #3c1053;
+  background: #ad5389; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #3c1053,
+    #ad5389
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #3c1053,
+    #ad5389
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.time-list {
+  display: flex;
+  justify-content: space-between;
+}
+.time-item {
+  flex-basis: calc((100% - 8px) / 5);
+  height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid rgba(60, 16, 83, 0.4);
+  border-radius: 50%;
+  -webkit-box-shadow: 3px -2px 4px 0px #3c1053;
+  -moz-box-shadow: 3px -2px 4px 0px #3c1053;
+  box-shadow: 3px -2px 4px 0px #3c1053;
+  transform: scale(1);
+  transform-origin: bottom left;
+  transition: transform 250ms linear, font-size 250ms linear;
+}
+.time-item:is(:hover, :focus) {
+  transform: scale(1.02);
+  font-size: 1.1rem;
+}
+@media screen and (max-width: 384px) {
+  .time-item {
+    font-size: 0.75rem;
+  }
+  .time-item:is(:hover, :focus) {
+    font-size: 0.8rem;
+  }
+}
