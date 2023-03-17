@@ -1,7 +1,7 @@
 body {
   margin: 0 auto;
   color: aliceblue;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
   line-height: 1.5;
 }
@@ -18,8 +18,11 @@ p {
   margin: 0;
 }
 h1 {
-  font-size: 32px;
   margin-bottom: 12px;
+  font-family: "Kaushan Script", cursive;
+  font-size: 32px;
+  font-weight: 400;
+  text-transform: capitalize;
 }
 ul {
   padding-left: 0;
@@ -32,6 +35,9 @@ a {
 }
 img {
   display: block;
+}
+i:not(:last-child) {
+  margin-right: 5px;
 }
 
 .underline {
@@ -46,16 +52,42 @@ img {
   padding: 16px 16px 0 16px;
   margin: 0 auto;
   text-align: center;
-  background: #ad5389; /* fallback for old browsers */
+  background: #000428; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #004e92,
+    #000428
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #004e92,
+    #000428
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.dark-bcg {
+  background: #000428; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #004e92,
+    #000428
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #004e92,
+    #000428
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.day-bcg {
+  background: #004ff9; /* fallback for old browsers */
   background: -webkit-linear-gradient(
     to right,
-    #3c1053,
-    #ad5389
+    #fff94c,
+    #004ff9
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
     to right,
-    #3c1053,
-    #ad5389
+    #fff94c,
+    #004ff9
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .search-form {
@@ -73,15 +105,15 @@ img {
   width: 100%;
   padding: 8px 16px;
   color: #4f4e50;
-  border: 1px solid rgba(60, 16, 83, 0.4);
-  -webkit-box-shadow: 3px -1px 4px 0px #3c1053;
-  -moz-box-shadow: 3px -1px 4px 0px #3c1053;
-  box-shadow: 3px -1px 4px 0px #3c1053;
+  border: 1px solid rgb(0, 4, 40, 0.4);
+  -webkit-box-shadow: 3px -1px 4px 0px #000428;
+  -moz-box-shadow: 3px -1px 4px 0px #000428;
+  box-shadow: 3px -1px 4px 0px #000428;
   border-radius: 4px;
 }
 .search-field::placeholder {
-  font-size: 0.9rem;
-  font-family: "Montserrat", sans-serif;
+  font-size: 0.8rem;
+  font-family: "Open Sans", sans-serif;
 }
 .form-control {
   position: absolute;
@@ -119,6 +151,7 @@ img {
   transform: scaleX(1.02);
 }
 .temperature {
+  font-family: "Kaushan Script", cursive;
   font-size: 18px;
 }
 .degrees {
@@ -138,7 +171,9 @@ img {
   margin-bottom: 4px;
 }
 .weather-desc {
+  font-family: "Kaushan Script", cursive;
   font-size: 0.9rem;
+  text-transform: capitalize;
 }
 .temp-range {
   display: flex;
@@ -147,6 +182,7 @@ img {
   gap: 8px;
   margin-bottom: 8px;
   font-weight: bold;
+  font-family: "Kaushan Script", cursive;
 }
 .picture {
   max-width: 80px;
@@ -159,26 +195,26 @@ img {
   justify-content: space-between;
   align-items: center;
   padding: 16px;
-  border-bottom: 3px solid rgba(60, 16, 83, 0.4);
+  border-bottom: 3px solid rgba(0, 4, 40, 0.4);
   font-size: 0.8rem;
 }
 .footer-wrapper {
   padding: 8px;
   border-top-right-radius: 15%;
   border-top-left-radius: 15%;
-  -webkit-box-shadow: 3px -2px 4px 0px #3c1053;
-  -moz-box-shadow: 3px -2px 4px 0px #3c1053;
-  box-shadow: 3px -2px 4px 0px #3c1053;
-  background: #ad5389; /* fallback for old browsers */
+  -webkit-box-shadow: 3px -2px 4px 0px #000428;
+  -moz-box-shadow: 3px -2px 4px 0px #000428;
+  box-shadow: 3px -2px 4px 0px #000428;
+  background: #000428; /* fallback for old browsers */
   background: -webkit-linear-gradient(
-    to right,
-    #3c1053,
-    #ad5389
+    to left,
+    #004e92,
+    #000428
   ); /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(
-    to right,
-    #3c1053,
-    #ad5389
+    to left,
+    #004e92,
+    #000428
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .time-list {
@@ -194,11 +230,10 @@ img {
   justify-content: space-around;
   padding: 8px;
   font-size: 16px;
-  /* border: 1px solid rgba(60, 16, 83, 0.4); */
   border-radius: 50%;
-  -webkit-box-shadow: 3px -2px 4px 0px #3c1053;
-  -moz-box-shadow: 3px -2px 4px 0px #3c1053;
-  box-shadow: 3px -2px 4px 0px #3c1053;
+  -webkit-box-shadow: 3px -2px 4px 0px #000428;
+  -moz-box-shadow: 3px -2px 4px 0px #000428;
+  box-shadow: 3px -2px 4px 0px #000428;
   transform: scale(1);
   transform-origin: bottom left;
   transition: transform 250ms linear, font-size 250ms linear;
@@ -220,4 +255,7 @@ img {
 }
 .autor-data {
   font-size: 0.8rem;
+}
+.autor-data span {
+  font-family: "Kaushan Script", cursive;
 }
