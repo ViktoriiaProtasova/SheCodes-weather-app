@@ -36,10 +36,9 @@ a {
 img {
   display: block;
 }
-i:not(:last-child) {
+.phone-attribute i:not(:last-child) {
   margin-right: 5px;
 }
-
 .underline {
   text-decoration: underline;
 }
@@ -64,39 +63,13 @@ i:not(:last-child) {
     #000428
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.dark-bcg {
-  background: #000428; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to left,
-    #004e92,
-    #000428
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to left,
-    #004e92,
-    #000428
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-.day-bcg {
-  background: #004ff9; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to right,
-    #fff94c,
-    #004ff9
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(
-    to right,
-    #fff94c,
-    #004ff9
-  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
 .search-form {
   position: relative;
   width: 90%;
   height: 45px;
   margin: 0 auto;
   display: flex;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
   transform: scale(1);
   transform-origin: bottom left;
   transition: transform 250ms linear;
@@ -133,7 +106,7 @@ i:not(:last-child) {
 }
 .icon-wrapper {
   position: relative;
-  display: inline-block;
+  margin-bottom: 16px;
 }
 .city-icon {
   font-size: 2rem;
@@ -153,11 +126,11 @@ i:not(:last-child) {
 .temperature {
   font-family: "Kaushan Script", cursive;
   font-size: 18px;
+
+  line-height: 1.11;
 }
 .degrees {
   margin-bottom: 8px;
-  font-size: 48px;
-  line-height: 1.11;
 }
 .units {
   display: none;
