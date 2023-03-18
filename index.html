@@ -21,6 +21,13 @@
       href="https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+      integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./src/styles.css" />
     <script
       src="https://kit.fontawesome.com/660d72a753.js"
@@ -51,30 +58,32 @@
           />
           <input type="image" src="./images/search.png" class="form-control" />
         </form>
-        <h1 id="city">Weather</h1>
-        <div class="icon-wrapper">
-          <i class="fa-solid fa-location-dot city-icon"></i>
-          <i class="fa-solid fa-location-pin city-icon is-pin"></i>
+        <div class="weather-wrapper">
+          <h1 id="city">Weather</h1>
+          <div class="icon-wrapper">
+            <i class="fa-solid fa-location-dot city-icon"></i>
+            <i class="fa-solid fa-location-pin city-icon is-pin"></i>
+          </div>
+          <p class="degrees">
+            <span class="temperature">&#186;C</span
+            ><span class="units"
+              ><a href="#" id="celsius-link">&#186;C</a> |
+              <a href="#" id="fahrenheit-link">&#186;F</a></span
+            >
+          </p>
+          <p class="date" id="date"></p>
+          <p class="weather-desc" id="temperature-description">Currently is</p>
+          <div class="temp-range">
+            <p class="max">H:</p>
+            <p class="min">L:</p>
+          </div>
+          <img
+            src="https://openweathermap.org/img/wn/02d@2x.png"
+            alt="Weather picture"
+            class="picture animate__animated animate__zoomIn"
+            id="image"
+          />
         </div>
-        <p class="degrees">
-          <span class="temperature"></span
-          ><span class="units"
-            ><a href="#" id="celsius-link">&#186;C</a> |
-            <a href="#" id="fahrenheit-link">&#186;F</a></span
-          >
-        </p>
-        <p class="date" id="date"></p>
-        <p class="weather-desc" id="temperature-description"></p>
-        <div class="temp-range">
-          <p class="max"></p>
-          <p class="min"></p>
-        </div>
-        <img
-          src="https://openweathermap.org/img/wn/02d@2x.png"
-          alt="Weather picture"
-          class="picture animate__animated animate__zoomIn"
-          id="image"
-        />
       </main>
       <footer class="footer-wrapper">
         <ul class="type-of-forecast">
