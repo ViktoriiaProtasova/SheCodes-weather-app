@@ -93,11 +93,11 @@ function showTemperature(response) {
 
   let humidity = response.data.main.humidity;
   let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = `Humidity ${humidity} %`;
+  humidityElement.innerHTML = `Humidity: ${humidity} %`;
 
   let wind = Math.round(response.data.wind.speed * 3.6);
   let windElement = document.querySelector("#wind");
-  windElement.innerHTML = `Wind ${wind} km/h`;
+  windElement.innerHTML = `Wind: ${wind} km/h`;
 
   let minTemp = Math.round(response.data.main.temp_min);
   let min = document.querySelector(".min");
@@ -134,11 +134,11 @@ function showWeather(response) {
 
   let humidity = response.data.main.humidity;
   let humidityElement = document.querySelector("#humidity");
-  humidityElement.innerHTML = `Humidity ${humidity} %`;
+  humidityElement.innerHTML = `Humidity: ${humidity} %`;
 
   let wind = Math.round(response.data.wind.speed * 3.6);
   let windElement = document.querySelector("#wind");
-  windElement.innerHTML = `Wind ${wind} km/h`;
+  windElement.innerHTML = `Wind: ${wind} km/h`;
 
   let minTemp = Math.round(response.data.main.temp_min);
   let min = document.querySelector(".min");
