@@ -48,15 +48,10 @@ function search(event) {
   if (input.value) {
     h1.innerHTML = input.value;
     searchCity(input.value);
-
-    let removeMargin = document.querySelector(".search-form");
-    removeMargin.classList.remove("margin");
   } else {
     h1.innerHTML = null;
     alert("Please, type a city");
-
-    let addMargin = document.querySelector(".search-form");
-    addMargin.classList.add("margin");
+    h1.innerHTML = "Weather";
   }
 }
 
@@ -158,12 +153,10 @@ function showWeather(response) {
   max.innerHTML = `H : ${maxTemp}°`;
 
   let icon = document.querySelector("#image");
-
   icon.setAttribute(
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-
   icon.setAttribute("alt", response.data.weather[0].description);
 }
 
