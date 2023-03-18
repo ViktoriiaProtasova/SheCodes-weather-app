@@ -5,6 +5,7 @@ body {
   font-size: 14px;
   line-height: 1.5;
 }
+
 header {
   display: flex;
   justify-content: space-between;
@@ -12,15 +13,18 @@ header {
   padding-top: 8px;
   margin-bottom: 32px;
 }
+
 main {
   position: relative;
 }
+
 h1,
 h2,
 h3,
 p {
   margin: 0;
 }
+
 h1 {
   margin-bottom: 12px;
   font-family: "Kaushan Script", cursive;
@@ -28,15 +32,18 @@ h1 {
   font-weight: 400;
   text-transform: capitalize;
 }
+
 ul {
   padding-left: 0;
   margin: 0;
   list-style: none;
 }
+
 a {
   text-decoration: none;
   color: inherit;
 }
+
 img {
   display: block;
 }
@@ -44,9 +51,15 @@ img {
 .phone-attribute i:not(:last-child) {
   margin-right: 5px;
 }
+
 .underline {
   text-decoration: underline;
 }
+
+.current {
+  color: aliceblue;
+}
+
 .container {
   position: relative;
   max-width: 480px;
@@ -66,12 +79,14 @@ img {
     #000428
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 .search-form {
   position: relative;
   display: flex;
   height: 45px;
   margin: 0 auto 32px;
 }
+
 .search-field {
   width: 100%;
   padding: 8px 16px;
@@ -82,10 +97,12 @@ img {
   box-shadow: 3px -1px 4px 0px #000428;
   border-radius: 4px;
 }
+
 .search-field::placeholder {
   font-size: 0.8rem;
   font-family: "Open Sans", sans-serif;
 }
+
 .form-control {
   position: absolute;
   top: 0;
@@ -103,52 +120,69 @@ img {
   left: 50%;
   transform: translate(-50%, 20%);
 }
-/* .margin {
-  transform: translate(-50%, 15%);
-} */
+
 .icon-wrapper {
   position: relative;
   margin-bottom: 16px;
 }
+
 .city-icon {
   font-size: 2rem;
   visibility: visible;
   opacity: 1;
-  transform: scale(1);
   cursor: pointer;
 }
+
+.city-icon::before {
+  padding: 10px;
+}
+
 .is-pin {
   position: absolute;
   transform: translateX(-50%);
   opacity: 0;
+  visibility: hidden;
 }
+
 .city-icon:hover {
-  transform: scaleX(1.02);
 }
+
 .temperature {
+  margin-right: 15px;
   font-family: "Kaushan Script", cursive;
-  font-size: 18px;
+  font-size: 36px;
   line-height: 1.11;
 }
+
 .degrees {
+  position: relative;
   margin-bottom: 8px;
 }
+
 .units {
-  display: none;
-  position: relative;
-  top: -34px;
-  font-size: 1rem;
+  position: absolute;
+  font-family: "Kaushan Script", cursive;
+  font-size: 0.8rem;
+  line-height: 1.11;
+  color: rgba(240, 248, 255, 0.6);
 }
+
+.units a {
+  cursor: default;
+}
+
 .date,
 .weather-desc {
   color: rgba(240, 248, 255, 0.6);
   margin-bottom: 4px;
 }
+
 .weather-desc {
   font-family: "Kaushan Script", cursive;
   font-size: 0.9rem;
   text-transform: capitalize;
 }
+
 .temp-range {
   display: flex;
   justify-content: center;
@@ -158,12 +192,14 @@ img {
   font-weight: bold;
   font-family: "Kaushan Script", cursive;
 }
+
 .picture {
   max-width: 80px;
   margin: 0 auto 8px;
   animation: zoomIn;
   animation-duration: 5000ms;
 }
+
 .type-of-forecast {
   display: flex;
   justify-content: space-between;
@@ -172,6 +208,7 @@ img {
   border-bottom: 3px solid rgba(0, 4, 40, 0.4);
   font-size: 0.8rem;
 }
+
 .footer-wrapper {
   position: absolute;
   bottom: 0;
@@ -196,11 +233,13 @@ img {
     #000428
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
 .time-list {
   display: flex;
   justify-content: space-between;
   padding: 16px 0;
 }
+
 .time-item {
   flex-basis: calc((100% - 8px) / 5);
   min-height: 100px;
@@ -217,24 +256,30 @@ img {
   transform-origin: bottom left;
   transition: transform 250ms linear, font-size 250ms linear;
 }
+
 .time-item:is(:hover, :focus) {
   transform: scale(1.02);
   font-size: 1.1rem;
 }
+
 @media screen and (max-width: 384px) {
   .time-item {
     font-size: 0.75rem;
   }
+
   .time-item:is(:hover, :focus) {
     font-size: 0.8rem;
   }
 }
+
 .repo-link {
   color: rgba(240, 248, 255, 0.6);
 }
+
 .autor-data {
   font-size: 0.8rem;
 }
+
 .autor-data span {
   font-family: "Kaushan Script", cursive;
 }
