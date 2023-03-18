@@ -1,10 +1,10 @@
 // Getting dates
 let now = new Date();
-
 let currentDate = now.getDate();
 let currentYear = now.getFullYear();
 let hours = `${now.getHours()}`.padStart(2, "0");
 let minutes = `${now.getMinutes()}`.padStart(2, "0");
+
 let days = [
   "Sunday",
   "Monday",
@@ -14,7 +14,9 @@ let days = [
   "Friday",
   "Saturday",
 ];
+
 let day = days[now.getDay()];
+
 let months = [
   "January",
   "February",
@@ -29,12 +31,16 @@ let months = [
   "November",
   "December",
 ];
+
 let month = months[now.getMonth()];
 
-let p = document.querySelector("p#date");
+let date = document.querySelector("p#date");
 let time = document.querySelector("time");
 
-p.innerHTML = `${day}, ${month} ${currentDate}, ${currentYear}`;
+let celsiusTemperature = null;
+let cityName = "";
+
+date.innerHTML = `${day}, ${month} ${currentDate}, ${currentYear}`;
 time.innerHTML = `${hours}:${minutes}`;
 
 // Search function
@@ -58,48 +64,12 @@ function search(event) {
 let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", search);
 
-// Temperature data
-
-// Celsius
-
-// function showCelsius(event) {
-//   event.preventDefault();
-
-//   let temp = document.querySelector(".temperature");
-//   temp.innerHTML = 19;
-
-//   let underlineCelsius = document.querySelector("#celsius-link");
-//   underlineCelsius.classList.add("underline");
-
-//   let underlineFahrenheit = document.querySelector("#fahrenheit-link");
-//   underlineFahrenheit.classList.remove("underline");
-// }
-
-// let celsius = document.querySelector("#celsius-link");
-// celsius.addEventListener("click", showCelsius);
-
-// Fahrenheit
-
-// function showFahrenheit(event) {
-//   event.preventDefault();
-
-//   let temp = document.querySelector(".temperature");
-//   temp.innerHTML = 66;
-
-//   let underlineFahrenheit = document.querySelector("#fahrenheit-link");
-//   underlineFahrenheit.classList.add("underline");
-
-//   let underlineCelsius = document.querySelector("#celsius-link");
-//   underlineCelsius.classList.remove("underline");
-// }
-// let fahrenheit = document.querySelector("#fahrenheit-link");
-// fahrenheit.addEventListener("click", showFahrenheit);
-
 // Search City
 
 function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
   let apiKey = "743bee57fddbfaf52447193a87d5dd25";
+
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
 
@@ -107,20 +77,25 @@ function showTemperature(response) {
   let currentCity = document.querySelector("#city");
   currentCity.innerHTML = response.data.name;
 
+  cityName = response.data.name;
+
   let temperature = Math.round(response.data.main.temp);
+  celsiusTemperature = Math.round(response.data.main.temp);
+
+  let currentLink = document.querySelector("#celsius-link");
+  currentLink.classList.add("current");
+
   let description = document.querySelector("#temperature-description");
   description.innerHTML = response.data.weather[0].description;
 
   let temperatureElement = document.querySelector(".temperature");
-  temperatureElement.innerHTML = `${temperature}°C`;
+  temperatureElement.innerHTML = `${temperature}`;
 
   let minTemp = Math.round(response.data.main.temp_min);
-
   let min = document.querySelector(".min");
   min.innerHTML = `L : ${minTemp}°`;
 
   let maxTemp = Math.round(response.data.main.temp_max);
-
   let max = document.querySelector(".max");
   max.innerHTML = `H : ${maxTemp}°`;
 
@@ -133,22 +108,27 @@ function showTemperature(response) {
 
 function showWeather(response) {
   let h1 = document.querySelector("h1");
-  let temperature = Math.round(response.data.main.temp);
   h1.innerHTML = `${response.data.name}`;
+
+  cityName = response.data.name;
+
+  let temperature = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector(".temperature");
+  temperatureElement.innerHTML = temperature;
+
+  celsiusTemperature = Math.round(response.data.main.temp);
+
+  let currentLink = document.querySelector("#celsius-link");
+  currentLink.classList.add("current");
 
   let description = document.querySelector("#temperature-description");
   description.innerHTML = response.data.weather[0].description;
 
-  let temperatureElement = document.querySelector(".temperature");
-  temperatureElement.innerHTML = `${temperature}°C`;
-
   let minTemp = Math.round(response.data.main.temp_min);
-
   let min = document.querySelector(".min");
   min.innerHTML = `L : ${minTemp}°`;
 
   let maxTemp = Math.round(response.data.main.temp_max);
-
   let max = document.querySelector(".max");
   max.innerHTML = `H : ${maxTemp}°`;
 
@@ -172,7 +152,7 @@ function getCurrentLocation(event) {
   event.preventDefault();
   navigator.geolocation.getCurrentPosition(currentPosition);
 
-  let removeIcon = document.querySelector(".city-icon.is-pin");
+  let removeIcon = document.querySelector(".is-pin");
   removeIcon.classList.remove("is-pin");
 
   let addIcon = document.querySelector(".city-icon");
@@ -181,3 +161,60 @@ function getCurrentLocation(event) {
 
 let currentCity = document.querySelector(".city-icon");
 currentCity.addEventListener("click", getCurrentLocation);
+
+// Temperature data
+
+// Celsius
+
+function showCelsius(event) {
+  event.preventDefault();
+
+  if (cityName !== "") {
+    let temp = document.querySelector(".temperature");
+    temp.innerHTML = celsiusTemperature;
+  } else {
+    let temperatureElement = document.querySelector(".temperature");
+    temperatureElement.innerHTML = `t`;
+  }
+  let currentLinkCelsius = document.querySelector("#celsius-link");
+  currentLinkCelsius.classList.add("current");
+
+  let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
+  currentLinkFahrenheit.classList.remove("current");
+}
+
+let celsius = document.querySelector("#celsius-link");
+celsius.addEventListener("click", showCelsius);
+
+// Fahrenheit (°C * 9 / 5) + 32
+
+function showFahrenheit(event) {
+  event.preventDefault();
+
+  if (cityName !== "") {
+    let temp = document.querySelector(".temperature");
+    temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+  } else {
+    let temperatureElement = document.querySelector(".temperature");
+    temperatureElement.innerHTML = `t`;
+  }
+
+  let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
+  currentLinkFahrenheit.classList.add("current");
+
+  let currentLinkCelsius = document.querySelector("#celsius-link");
+  currentLinkCelsius.classList.remove("current");
+}
+
+let fahrenheit = document.querySelector("#fahrenheit-link");
+fahrenheit.addEventListener("click", showFahrenheit);
+
+// Reset Search Form
+
+function resetSearchForm() {
+  document.getElementById("search-form").reset();
+  location.reload();
+}
+
+let cityIconPin = document.querySelector(".is-pin");
+cityIconPin.addEventListener("click", resetSearchForm);
