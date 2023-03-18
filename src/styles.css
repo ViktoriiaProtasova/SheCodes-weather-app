@@ -9,7 +9,11 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  padding-top: 8px;
+  margin-bottom: 32px;
+}
+main {
+  position: relative;
 }
 h1,
 h2,
@@ -36,6 +40,7 @@ a {
 img {
   display: block;
 }
+
 .phone-attribute i:not(:last-child) {
   margin-right: 5px;
 }
@@ -43,12 +48,10 @@ img {
   text-decoration: underline;
 }
 .container {
-  display: flex;
+  position: relative;
   max-width: 480px;
-  min-height: 100vh;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 16px 16px 0 16px;
+  height: 100vh;
+  padding: 0 16px 0 16px;
   margin: 0 auto;
   text-align: center;
   background: #000428; /* fallback for old browsers */
@@ -65,14 +68,9 @@ img {
 }
 .search-form {
   position: relative;
-  width: 90%;
-  height: 45px;
-  margin: 0 auto;
   display: flex;
-  margin-bottom: 32px;
-  transform: scale(1);
-  transform-origin: bottom left;
-  transition: transform 250ms linear;
+  height: 45px;
+  margin: 0 auto 32px;
 }
 .search-field {
   width: 100%;
@@ -98,12 +96,16 @@ img {
   cursor: pointer;
   opacity: 0.75;
 }
-.search-form:is(:hover, :focus) {
-  transform: scale(1.02);
+
+.weather-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, 20%);
 }
-.margin {
-  margin-bottom: 78px;
-}
+/* .margin {
+  transform: translate(-50%, 15%);
+} */
 .icon-wrapper {
   position: relative;
   margin-bottom: 16px;
@@ -126,7 +128,6 @@ img {
 .temperature {
   font-family: "Kaushan Script", cursive;
   font-size: 18px;
-
   line-height: 1.11;
 }
 .degrees {
@@ -172,6 +173,11 @@ img {
   font-size: 0.8rem;
 }
 .footer-wrapper {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
   padding: 8px;
   border-top-right-radius: 15%;
   border-top-left-radius: 15%;
