@@ -183,11 +183,23 @@ img {
   text-transform: capitalize;
 }
 
+.weather-desc-additionally {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.weather-desc-additionally .weather-desc {
+  font-size: 0.7rem;
+  font-family: "Open Sans", sans-serif;
+  text-transform: none;
+}
+
 .temp-range {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 15px;
   margin-bottom: 8px;
   font-weight: bold;
   font-family: "Kaushan Script", cursive;
