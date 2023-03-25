@@ -43,6 +43,89 @@ let cityName = "";
 date.innerHTML = `${day}, ${month} ${currentDate}, ${currentYear}`;
 time.innerHTML = `${hours}:${minutes}`;
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+// Display Forecast
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      let currentDay = document.querySelectorAll(".weather-forecast-day")[
+        index
+      ];
+      currentDay.innerHTML = formatDay(forecastDay.dt);
+
+      let currentTempMax = document.querySelectorAll(".weekly-forecast .max")[
+        index
+      ];
+      currentTempMax.innerHTML = `${Math.round(forecastDay.temp.max)}°`;
+
+      let currentTempMin = document.querySelectorAll(".weekly-forecast .min")[
+        index
+      ];
+      currentTempMin.innerHTML = `${Math.round(forecastDay.temp.min)}°`;
+
+      let icon = document.querySelector(".weekly-forecast #image");
+      icon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png`
+      );
+    }
+  });
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayHourlyForecast(response) {
+  let hourlyForecast = response.data.hourly;
+
+  hourlyForecast.forEach(function (hourlyData, index) {
+    if (index < 24) {
+      let currentHour = document.querySelectorAll(".weather-forecast-time")[
+        index
+      ];
+      currentHour.innerHTML = formatHour(hourlyData.dt);
+
+      let currentTemp = document.querySelectorAll(
+        ".hourly-forecast-temperature"
+      )[index];
+      currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
+
+      let icon = document.querySelectorAll(".hourly-forecast #image")[index];
+      icon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
+      );
+    }
+  });
+}
+
+function getHourlyForecast(coordinates) {
+  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayHourlyForecast);
+}
+
+function formatHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  return `${hours}:00`;
+}
+
 // Search function
 
 function search(event) {
@@ -82,7 +165,7 @@ function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   celsiusTemperature = Math.round(response.data.main.temp);
 
-  let currentLink = document.querySelector("#celsius-link");
+  let currentLink = document.querySelector("#celsius");
   currentLink.classList.add("current");
 
   let description = document.querySelector("#temperature-description");
@@ -112,6 +195,9 @@ function showTemperature(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+
+  getForecast(response.data.coord);
+  getHourlyForecast(response.data.coord);
 }
 
 function showWeather(response) {
@@ -126,7 +212,7 @@ function showWeather(response) {
 
   celsiusTemperature = Math.round(response.data.main.temp);
 
-  let currentLink = document.querySelector("#celsius-link");
+  let currentLink = document.querySelector("#celsius");
   currentLink.classList.add("current");
 
   let description = document.querySelector("#temperature-description");
@@ -154,6 +240,11 @@ function showWeather(response) {
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   icon.setAttribute("alt", response.data.weather[0].description);
+
+  getForecast(response.data.coord);
+  getHourlyForecast(response.data.coord);
+
+  // getForecast(response.data.coord);
 }
 
 function currentPosition(position) {
@@ -182,48 +273,48 @@ currentCity.addEventListener("click", getCurrentLocation);
 
 // Celsius
 
-function showCelsius(event) {
-  event.preventDefault();
+// function showCelsius(event) {
+//   event.preventDefault();
 
-  if (cityName !== "") {
-    let temp = document.querySelector(".temperature");
-    temp.innerHTML = celsiusTemperature;
-  } else {
-    let temperatureElement = document.querySelector(".temperature");
-    temperatureElement.innerHTML = `t`;
-  }
-  let currentLinkCelsius = document.querySelector("#celsius-link");
-  currentLinkCelsius.classList.add("current");
+//   if (cityName !== "") {
+//     let temp = document.querySelector(".temperature");
+//     temp.innerHTML = celsiusTemperature;
+//   } else {
+//     let temperatureElement = document.querySelector(".temperature");
+//     temperatureElement.innerHTML = `t`;
+//   }
+//   let currentLinkCelsius = document.querySelector("#celsius-link");
+//   currentLinkCelsius.classList.add("current");
 
-  let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
-  currentLinkFahrenheit.classList.remove("current");
-}
+//   let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
+//   currentLinkFahrenheit.classList.remove("current");
+// }
 
-let celsius = document.querySelector("#celsius-link");
-celsius.addEventListener("click", showCelsius);
+// let celsius = document.querySelector("#celsius-link");
+// celsius.addEventListener("click", showCelsius);
 
 // Fahrenheit (°C * 9 / 5) + 32
 
-function showFahrenheit(event) {
-  event.preventDefault();
+// function showFahrenheit(event) {
+//   event.preventDefault();
 
-  if (cityName !== "") {
-    let temp = document.querySelector(".temperature");
-    temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
-  } else {
-    let temperatureElement = document.querySelector(".temperature");
-    temperatureElement.innerHTML = `t`;
-  }
+//   if (cityName !== "") {
+//     let temp = document.querySelector(".temperature");
+//     temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
+//   } else {
+//     let temperatureElement = document.querySelector(".temperature");
+//     temperatureElement.innerHTML = `t`;
+//   }
 
-  let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
-  currentLinkFahrenheit.classList.add("current");
+//   let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
+//   currentLinkFahrenheit.classList.add("current");
 
-  let currentLinkCelsius = document.querySelector("#celsius-link");
-  currentLinkCelsius.classList.remove("current");
-}
+//   let currentLinkCelsius = document.querySelector("#celsius-link");
+//   currentLinkCelsius.classList.remove("current");
+// }
 
-let fahrenheit = document.querySelector("#fahrenheit-link");
-fahrenheit.addEventListener("click", showFahrenheit);
+// let fahrenheit = document.querySelector("#fahrenheit-link");
+// fahrenheit.addEventListener("click", showFahrenheit);
 
 // Reset Search Form
 
@@ -246,6 +337,9 @@ function changeForecastToWeekly() {
 
   let disabledHourly = document.querySelector(".hourly-forecast");
   disabledHourly.classList.add("disabled-forecast");
+
+  let currentHourly = document.querySelector(".hourly-forecast");
+  currentHourly.classList.remove("current-forecast");
 }
 
 let weeklyForecast = document.querySelector("#weekly-forecast");
@@ -255,11 +349,14 @@ function changeForecastToHourly() {
   let currentHourly = document.querySelector(".hourly-forecast");
   currentHourly.classList.add("current-forecast");
 
+  let disabledHourly = document.querySelector(".hourly-forecast");
+  disabledHourly.classList.remove("disabled-forecast");
+
   let disabledWeekly = document.querySelector(".weekly-forecast");
   disabledWeekly.classList.add("disabled-forecast");
 
-  let disabledHourly = document.querySelector(".hourly-forecast");
-  disabledHourly.classList.remove("disabled-forecast");
+  let currentWeekly = document.querySelector(".weekly-forecast");
+  currentWeekly.classList.remove("current-forecast");
 }
 
 let hourlyForecast = document.querySelector("#hourly-forecast");
