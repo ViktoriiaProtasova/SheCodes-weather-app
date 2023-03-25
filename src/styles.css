@@ -28,7 +28,7 @@ p {
 h1 {
   margin-bottom: 12px;
   font-family: "Kaushan Script", cursive;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: 400;
 }
 
@@ -123,6 +123,7 @@ img {
 .city-search {
   display: flex;
   justify-content: center;
+  align-items: baseline;
   gap: 15px;
 }
 
