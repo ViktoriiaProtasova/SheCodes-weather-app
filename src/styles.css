@@ -257,9 +257,6 @@ img {
 }
 
 .type-of-forecast {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
   border-bottom: 3px solid rgba(0, 4, 40, 0.4);
   font-size: 0.8rem;
 }
@@ -273,7 +270,7 @@ img {
 }
 
 .current-forecast {
-  display: flex;
+  display: block;
 }
 
 .disabled-forecast {
@@ -288,7 +285,7 @@ img {
 
 .time-item {
   flex-basis: calc(100% / 5);
-  min-height: 100px;
+  height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
