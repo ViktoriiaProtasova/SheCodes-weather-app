@@ -296,9 +296,18 @@ img {
   transition: transform 250ms linear, font-size 250ms linear;
 }
 
-@media screen and (max-width: 384px) {
+@media screen and (max-width: 320px) {
+  .time-list {
+    overflow-x: scroll;
+  }
+}
+
+@media screen and (max-width: 360px) {
   .time-item {
     font-size: 0.75rem;
+  }
+  .temp-forecast-range {
+    font-size: 0.6rem;
   }
 }
 
