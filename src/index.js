@@ -1,4 +1,5 @@
 // Getting dates
+
 let now = new Date();
 let currentDate = now.getDate();
 let currentYear = now.getFullYear();
@@ -33,98 +34,12 @@ let months = [
 ];
 
 let month = months[now.getMonth()];
-
 let date = document.querySelector("p#date");
 let time = document.querySelector("time");
-
 let celsiusTemperature = null;
-let cityName = "";
 
 date.innerHTML = `${day}, ${month} ${currentDate}, ${currentYear}`;
 time.innerHTML = `${hours}:${minutes}`;
-
-function formatDay(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let day = date.getDay();
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  return days[day];
-}
-
-// Display Forecast
-
-function displayForecast(response) {
-  let forecast = response.data.daily;
-
-  forecast.forEach(function (forecastDay, index) {
-    if (index < 6) {
-      let currentDay = document.querySelectorAll(".weather-forecast-day")[
-        index
-      ];
-      currentDay.innerHTML = formatDay(forecastDay.dt);
-
-      let currentTempMax = document.querySelectorAll(".weekly-forecast .max")[
-        index
-      ];
-      currentTempMax.innerHTML = `${Math.round(forecastDay.temp.max)}°`;
-
-      let currentTempMin = document.querySelectorAll(".weekly-forecast .min")[
-        index
-      ];
-      currentTempMin.innerHTML = `${Math.round(forecastDay.temp.min)}°`;
-
-      let icon = document.querySelector(".weekly-forecast #image");
-      icon.setAttribute(
-        "src",
-        `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png`
-      );
-    }
-  });
-}
-
-function getForecast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
-}
-
-function displayHourlyForecast(response) {
-  let hourlyForecast = response.data.hourly;
-
-  hourlyForecast.forEach(function (hourlyData, index) {
-    if (index < 24) {
-      let currentHour = document.querySelectorAll(".weather-forecast-time")[
-        index
-      ];
-      currentHour.innerHTML = formatHour(hourlyData.dt);
-
-      let currentTemp = document.querySelectorAll(
-        ".hourly-forecast-temperature"
-      )[index];
-      currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
-
-      let icon = document.querySelectorAll(".hourly-forecast #image")[index];
-      icon.setAttribute(
-        "src",
-        `http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
-      );
-    }
-  });
-}
-
-function getHourlyForecast(coordinates) {
-  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(displayHourlyForecast);
-}
-
-function formatHour(timestamp) {
-  let date = new Date(timestamp * 1000);
-  let hours = date.getHours();
-  return `${hours}:00`;
-}
 
 // Search function
 
@@ -155,6 +70,18 @@ function searchCity(city) {
 
   axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
+
+// Reset Search Form
+
+function resetSearchForm() {
+  document.getElementById("search-form").reset();
+  location.reload();
+}
+
+let cityIconPin = document.querySelector(".is-pin");
+cityIconPin.addEventListener("click", resetSearchForm);
+
+// Show Temperature
 
 function showTemperature(response) {
   let currentCity = document.querySelector("#city");
@@ -243,8 +170,91 @@ function showWeather(response) {
 
   getForecast(response.data.coord);
   getHourlyForecast(response.data.coord);
+}
 
-  // getForecast(response.data.coord);
+// Display Forecast
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
+
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 6) {
+      let currentDay = document.querySelectorAll(".weather-forecast-day")[
+        index
+      ];
+      currentDay.innerHTML = formatDay(forecastDay.dt);
+
+      let currentTempMax = document.querySelectorAll(".weekly-forecast .max")[
+        index
+      ];
+      currentTempMax.innerHTML = `${Math.round(forecastDay.temp.max)}°`;
+
+      let currentTempMin = document.querySelectorAll(".weekly-forecast .min")[
+        index
+      ];
+      currentTempMin.innerHTML = `${Math.round(forecastDay.temp.min)}°`;
+
+      let icon = document.querySelector(".weekly-forecast #image");
+      icon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png`
+      );
+    }
+  });
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(displayForecast);
+}
+
+function displayHourlyForecast(response) {
+  let hourlyForecast = response.data.hourly;
+
+  hourlyForecast.forEach(function (hourlyData, index) {
+    if (index < 24) {
+      let currentHour = document.querySelectorAll(".weather-forecast-time")[
+        index
+      ];
+      currentHour.innerHTML = formatHour(hourlyData.dt);
+
+      let currentTemp = document.querySelectorAll(
+        ".hourly-forecast-temperature"
+      )[index];
+      currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
+
+      let icon = document.querySelectorAll(".hourly-forecast #image")[index];
+      icon.setAttribute(
+        "src",
+        `http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
+      );
+    }
+  });
+}
+
+// Get Forecast by coordinates
+
+function getHourlyForecast(coordinates) {
+  let apiKey = "743bee57fddbfaf52447193a87d5dd25";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(displayHourlyForecast);
+}
+
+function formatHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  return `${hours}:00`;
 }
 
 function currentPosition(position) {
@@ -269,64 +279,7 @@ function getCurrentLocation(event) {
 let currentCity = document.querySelector(".city-icon");
 currentCity.addEventListener("click", getCurrentLocation);
 
-// Temperature data
-
-// Celsius
-
-// function showCelsius(event) {
-//   event.preventDefault();
-
-//   if (cityName !== "") {
-//     let temp = document.querySelector(".temperature");
-//     temp.innerHTML = celsiusTemperature;
-//   } else {
-//     let temperatureElement = document.querySelector(".temperature");
-//     temperatureElement.innerHTML = `t`;
-//   }
-//   let currentLinkCelsius = document.querySelector("#celsius-link");
-//   currentLinkCelsius.classList.add("current");
-
-//   let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
-//   currentLinkFahrenheit.classList.remove("current");
-// }
-
-// let celsius = document.querySelector("#celsius-link");
-// celsius.addEventListener("click", showCelsius);
-
-// Fahrenheit (°C * 9 / 5) + 32
-
-// function showFahrenheit(event) {
-//   event.preventDefault();
-
-//   if (cityName !== "") {
-//     let temp = document.querySelector(".temperature");
-//     temp.innerHTML = Math.round((celsiusTemperature * 9) / 5 + 32);
-//   } else {
-//     let temperatureElement = document.querySelector(".temperature");
-//     temperatureElement.innerHTML = `t`;
-//   }
-
-//   let currentLinkFahrenheit = document.querySelector("#fahrenheit-link");
-//   currentLinkFahrenheit.classList.add("current");
-
-//   let currentLinkCelsius = document.querySelector("#celsius-link");
-//   currentLinkCelsius.classList.remove("current");
-// }
-
-// let fahrenheit = document.querySelector("#fahrenheit-link");
-// fahrenheit.addEventListener("click", showFahrenheit);
-
-// Reset Search Form
-
-function resetSearchForm() {
-  document.getElementById("search-form").reset();
-  location.reload();
-}
-
-let cityIconPin = document.querySelector(".is-pin");
-cityIconPin.addEventListener("click", resetSearchForm);
-
-// Temperature forecast
+// Change Forecast To
 
 function changeForecastToWeekly() {
   let currentWeekly = document.querySelector(".weekly-forecast");
