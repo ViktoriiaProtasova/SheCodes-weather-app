@@ -59,10 +59,12 @@
           <input type="image" src="./images/search.png" class="form-control" />
         </form>
         <div class="weather-wrapper">
-          <h1 id="city">Weather</h1>
-          <div class="icon-wrapper">
-            <i class="fa-solid fa-location-dot city-icon"></i>
-            <i class="fa-solid fa-location-pin city-icon is-pin"></i>
+          <div class="city-search">
+            <h1 id="city">Weather</h1>
+            <div class="icon-wrapper">
+              <i class="fa-solid fa-location-dot city-icon"></i>
+              <i class="fa-solid fa-location-pin city-icon is-pin"></i>
+            </div>
           </div>
           <p class="degrees">
             <span class="temperature">t</span
@@ -90,32 +92,156 @@
         </div>
       </main>
       <footer class="footer-wrapper">
+        <div class="button-wrapper">
+          <button type="button" class="footer-button" id="hourly-forecast">
+            Hourly Forcast
+          </button>
+          <button type="button" class="footer-button" id="weekly-forecast">
+            Weekly Forcast
+          </button>
+        </div>
         <ul class="type-of-forecast">
-          <li>Hourly Forcast</li>
-          <li>Weekly Forcast</li>
+          <li class="hourly-forecast">
+            <ul class="time-list">
+              <li class="time-item">
+                <p class="weather-forecast-time">12 AM</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-time">Now</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-time">2 AM</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-time">3 AM</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-time">4 AM</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+            </ul>
+          </li>
+
+          <li class="weekly-forecast disabled-forecast">
+            <ul class="time-list">
+              <li class="time-item">
+                <p class="weather-forecast-day">Sun</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-day">Mon</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-day">Tue</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-day">Wed</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+              <li class="time-item">
+                <p class="weather-forecast-day">Thu</p>
+                <img
+                  src="https://openweathermap.org/img/wn/02d@2x.png"
+                  alt="Weather picture"
+                  class="picture animate__animated animate__zoomIn"
+                  id="image"
+                />
+                <div class="temp-range temp-forecast-range">
+                  <p class="max">H:</p>
+                  <p class="min">L:</p>
+                </div>
+              </li>
+            </ul>
+          </li>
         </ul>
-        <ul class="time-list">
-          <li class="time-item">
-            <p>12 AM</p>
-            <p>19&#176;</p>
-          </li>
-          <li class="time-item">
-            <p>Now</p>
-            <p>19&#176;</p>
-          </li>
-          <li class="time-item">
-            <p>2 AM</p>
-            <p>18&#176;</p>
-          </li>
-          <li class="time-item">
-            <p>3 AM</p>
-            <p>19&#176;</p>
-          </li>
-          <li class="time-item">
-            <p>4 AM</p>
-            <p>19&#176;</p>
-          </li>
-        </ul>
+
         <p class="autor-data">
           <a
             href="https://github.com/ViktoriiaProtasova/shecodes-weather-app"
