@@ -169,10 +169,6 @@ img {
   color: rgba(240, 248, 255, 0.6);
 }
 
-.units a {
-  cursor: default;
-}
-
 .date,
 .weather-desc {
   color: rgba(240, 248, 255, 0.6);
@@ -299,20 +295,11 @@ img {
   transform-origin: bottom left;
   transition: transform 250ms linear, font-size 250ms linear;
 }
-/* 
-.time-item:is(:hover, :focus) {
-  transform: scale(1.02);
-  font-size: 1.1rem;
-} */
 
 @media screen and (max-width: 384px) {
   .time-item {
     font-size: 0.75rem;
   }
-  /* 
-  .time-item:is(:hover, :focus) {
-    font-size: 0.8rem;
-  } */
 }
 
 .repo-link {
