@@ -208,7 +208,7 @@ img {
 }
 
 .picture {
-  max-width: 50%;
+  max-width: 45%;
   margin: 0 auto 8px;
   animation: zoomIn;
   animation-duration: 5000ms;
