@@ -234,3 +234,33 @@ function resetSearchForm() {
 
 let cityIconPin = document.querySelector(".is-pin");
 cityIconPin.addEventListener("click", resetSearchForm);
+
+// Temperature forecast
+
+function changeForecastToWeekly() {
+  let currentWeekly = document.querySelector(".weekly-forecast");
+  currentWeekly.classList.add("current-forecast");
+
+  let disabledWeekly = document.querySelector(".weekly-forecast");
+  disabledWeekly.classList.remove("disabled-forecast");
+
+  let disabledHourly = document.querySelector(".hourly-forecast");
+  disabledHourly.classList.add("disabled-forecast");
+}
+
+let weeklyForecast = document.querySelector("#weekly-forecast");
+weeklyForecast.addEventListener("click", changeForecastToWeekly);
+
+function changeForecastToHourly() {
+  let currentHourly = document.querySelector(".hourly-forecast");
+  currentHourly.classList.add("current-forecast");
+
+  let disabledWeekly = document.querySelector(".weekly-forecast");
+  disabledWeekly.classList.add("disabled-forecast");
+
+  let disabledHourly = document.querySelector(".hourly-forecast");
+  disabledHourly.classList.remove("disabled-forecast");
+}
+
+let hourlyForecast = document.querySelector("#hourly-forecast");
+hourlyForecast.addEventListener("click", changeForecastToHourly);
