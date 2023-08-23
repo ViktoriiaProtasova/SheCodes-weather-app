@@ -282,7 +282,7 @@ img {
 
 .time-item {
   flex-basis: calc(100% / 5);
-  height: 150px;
+  min-height: 150px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
