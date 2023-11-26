@@ -1,6 +1,6 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/afcbd9ca-f0ce-4413-ab13-fdea9ed0238f/deploy-status)](https://app.netlify.com/sites/she-codes-weather/deploys)
 
-## shecodes-weather-app ☔️
+## Shecodes-weather-app ☔️
 
 An App for searching and watching the weather.
 
