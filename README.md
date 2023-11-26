@@ -24,7 +24,8 @@ An App for searching and watching the weather.
 - AXIOS
 - Rest API
 
-
 ## API
 
 The application uses an [openweathermap API](https://openweathermap.org/).
+
+<img width="450" alt="Screenshot" src="assets/screenshot.jpg">
