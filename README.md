@@ -27,4 +27,4 @@ An App for searching and watching the weather.
 
 ## API
 
-The application uses a mock API created with [Mockapi.io](https://mockapi.io/). The `adverts` resource contains information about car listings.
+The application uses an [openweathermap API](https://openweathermap.org/).
