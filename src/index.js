@@ -117,7 +117,7 @@ function showTemperature(response) {
 	let max = document.querySelector('.max');
 	max.innerHTML = `H : ${maxTemp}°`;
 
-	let icon = document.querySelector('#image');
+	let icon = document.querySelector('.image');
 	icon.setAttribute(
 		'src',
 		`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
