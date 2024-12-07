@@ -35,7 +35,7 @@ let months = [
 
 let month = months[now.getMonth()];
 let date = document.querySelector('p#date');
-let time = document.querySelector('time');
+let time = document.querySelector('#time');
 let celsiusTemperature = null;
 
 date.innerHTML = `${day}, ${month} ${currentDate}, ${currentYear}`;
