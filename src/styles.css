@@ -198,7 +198,7 @@ img {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 5px;
+	gap: 15px;
 	margin-bottom: 8px;
 	font-weight: bold;
 	font-family: 'Kaushan Script', cursive;
