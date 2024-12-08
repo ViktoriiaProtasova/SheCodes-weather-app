@@ -34,7 +34,7 @@ let months = [
 ];
 
 let month = months[now.getMonth()];
-let date = document.querySelector('p#date');
+let date = document.querySelector('#date');
 let time = document.querySelector('#time');
 let celsiusTemperature = null;
 
@@ -87,8 +87,6 @@ function showTemperature(response) {
 	let currentCity = document.querySelector('#city');
 	currentCity.innerHTML = response.data.name;
 
-	// cityName = response.data.name;
-
 	let temperature = Math.round(response.data.main.temp);
 	celsiusTemperature = Math.round(response.data.main.temp);
 
@@ -131,8 +129,6 @@ function showWeather(response) {
 	let h1 = document.querySelector('h1');
 	h1.innerHTML = `${response.data.name}`;
 
-	// cityName = response.data.name;
-
 	let temperature = Math.round(response.data.main.temp);
 	let temperatureElement = document.querySelector('.temperature');
 	temperatureElement.innerHTML = temperature;
@@ -174,88 +170,12 @@ function showWeather(response) {
 
 // Display Forecast
 
-function displayForecast(response) {
-	let forecast = response.data.daily;
-
-	forecast.forEach(function (forecastDay, index) {
-		if (index < 6) {
-			let currentDay = document.querySelectorAll('.weather-forecast-day')[
-				index
-			];
-			currentDay.innerHTML = formatDay(forecastDay.dt);
-
-			let currentTempMax = document.querySelectorAll('.weekly-forecast .max')[
-				index
-			];
-			currentTempMax.innerHTML = `${Math.round(forecastDay.temp.max)}°`;
-
-			let currentTempMin = document.querySelectorAll('.weekly-forecast .min')[
-				index
-			];
-			currentTempMin.innerHTML = `${Math.round(forecastDay.temp.min)}°`;
-
-			let icon = document.querySelector('.weekly-forecast .image');
-			icon.setAttribute(
-				'src',
-				`http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png`
-			);
-		}
-	});
-}
-
-function formatDay(timestamp) {
-	let date = new Date(timestamp * 1000);
-	let day = date.getDay();
-	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-
-	return days[day];
-}
-
-// function getForecast(coordinates) {
-// 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
-// 	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-// 	axios.get(apiUrl).then(displayForecast);
-// }
-
 function getForecast(coordinates) {
 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
 	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
 
 	axios.get(apiUrl).then(displayForecast);
 }
-
-// function displayHourlyForecast(response) {
-// 	let hourlyForecast = response.data.hourly;
-
-// 	hourlyForecast.forEach(function (hourlyData, index) {
-// 		if (index < 24) {
-// 			let currentHour = document.querySelectorAll('.weather-forecast-time')[
-// 				index
-// 			];
-// 			currentHour.innerHTML = formatHour(hourlyData.dt);
-
-// 			let currentTemp = document.querySelectorAll(
-// 				'.hourly-forecast-temperature'
-// 			)[index];
-// 			currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
-
-// 			let icon = document.querySelectorAll('.hourly-forecast .image')[index];
-// 			icon.setAttribute(
-// 				'src',
-// 				`http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
-// 			);
-// 		}
-// 	});
-// }
-
-// Get Forecast by coordinates
-
-// function getHourlyForecast(coordinates) {
-// 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
-// 	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
-// 	axios.get(apiUrl).then(displayHourlyForecast);
-// }
 
 function getHourlyForecast(coordinates) {
 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
@@ -264,11 +184,51 @@ function getHourlyForecast(coordinates) {
 	axios.get(apiUrl).then(displayHourlyForecast);
 }
 
+function displayForecast(response) {
+	let forecast = response.data.list;
+	let forecastElement = document.querySelector('.weekly-forecast');
+
+	forecastElement.innerHTML = '';
+
+	const dailyForecast = [];
+
+	for (let i = 0; i < forecast.length; i += 1) {
+		if (
+			i + 1 < forecast.length &&
+			formatDay(forecast[i].dt) !== formatDay(forecast[i + 1].dt)
+		) {
+			dailyForecast.push(forecast[i]);
+		}
+	}
+
+	dailyForecast.forEach(function (forecastDay, index) {
+		if (index < 5) {
+			forecastElement.innerHTML += `
+			<ul class="time-list">
+        <li class="time-item">
+          <p class="weather-forecast-day">${formatDay(forecastDay.dt)}</p>
+          <img
+            src="http://openweathermap.org/img/wn/${
+							forecastDay.weather[0].icon
+						}.png"
+            alt="${forecastDay.weather[0].description}"
+            class="picture animate__animated animate__zoomIn image"
+          />
+          <div class="temp-range temp-forecast-range">
+            <p class="max">H: ${Math.round(forecastDay.main.temp_max)}°</p>
+            <p class="min">L: ${Math.round(forecastDay.main.temp_min)}°</p>
+          </div>
+        </li>
+				</ul>
+      `;
+		}
+	});
+}
+
 function displayHourlyForecast(response) {
-	let hourlyForecast = response.data.list.slice(0, 7); // Перші 24 години (по 3 години крок)
+	let hourlyForecast = response.data.list.slice(0, 5);
 	let hourlyElement = document.querySelector('.hourly-forecast');
 
-	// Очищення контейнера перед додаванням нового прогнозу
 	hourlyElement.innerHTML = '';
 
 	hourlyForecast.forEach(function (hourlyData) {
@@ -299,59 +259,12 @@ function formatHour(timestamp) {
 	return `${hours}:00`;
 }
 
-function displayForecast(response) {
-	let forecast = response.data.list; // Масив прогнозу кожні 3 години
-	let forecastElement = document.querySelector('.weekly-forecast');
-
-	// Очищення контейнера перед додаванням нового прогнозу
-	// forecastElement.innerHTML = '';
-
-	// Групування даних для денного прогнозу
-	let dailyForecast = [];
-	forecast.forEach(function (item) {
-		let date = new Date(item.dt * 1000);
-		let hour = date.getHours();
-
-		// Вибираємо значення об 12:00 як денний прогноз
-		if (hour === 12) {
-			dailyForecast.push(item);
-		}
-	});
-
-	dailyForecast.forEach(function (forecastDay, index) {
-		if (index < 6) {
-			forecastElement.innerHTML += `
-			<ul class="time-list">
-        <li class="time-item">
-          <p class="weather-forecast-day">${formatDay(forecastDay.dt)}</p>
-          <img
-            src="http://openweathermap.org/img/wn/${
-							forecastDay.weather[0].icon
-						}.png"
-            alt="${forecastDay.weather[0].description}"
-            class="picture animate__animated animate__zoomIn image"
-          />
-          <div class="temp-range temp-forecast-range">
-            <p class="max">H: ${Math.round(forecastDay.main.temp_max)}°</p>
-            <p class="min">L: ${Math.round(forecastDay.main.temp_min)}°</p>
-          </div>
-        </li>
-				</ul>
-      `;
-		}
-	});
-}
-
 function formatDay(timestamp) {
 	let date = new Date(timestamp * 1000);
+	let day = date.getDay();
 	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-	return days[date.getDay()];
-}
 
-function formatHour(timestamp) {
-	let date = new Date(timestamp * 1000);
-	let hours = date.getHours();
-	return `${hours}:00`;
+	return days[day];
 }
 
 function currentPosition(position) {
