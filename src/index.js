@@ -66,7 +66,7 @@ searchForm.addEventListener('submit', search);
 
 function searchCity(city) {
 	let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
-	let apiKey = '743bee57fddbfaf52447193a87d5dd25';
+	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
 
 	axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
 }
@@ -161,7 +161,7 @@ function showWeather(response) {
 	let max = document.querySelector('.max');
 	max.innerHTML = `H : ${maxTemp}°`;
 
-	let icon = document.querySelector('#image');
+	let icon = document.querySelector('.image');
 	icon.setAttribute(
 		'src',
 		`https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -194,7 +194,7 @@ function displayForecast(response) {
 			];
 			currentTempMin.innerHTML = `${Math.round(forecastDay.temp.min)}°`;
 
-			let icon = document.querySelector('.weekly-forecast #image');
+			let icon = document.querySelector('.weekly-forecast .image');
 			icon.setAttribute(
 				'src',
 				`http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}.png`
@@ -211,43 +211,141 @@ function formatDay(timestamp) {
 	return days[day];
 }
 
+// function getForecast(coordinates) {
+// 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
+// 	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+// 	axios.get(apiUrl).then(displayForecast);
+// }
+
 function getForecast(coordinates) {
-	let apiKey = '743bee57fddbfaf52447193a87d5dd25';
-	let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
+	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
 	axios.get(apiUrl).then(displayForecast);
 }
 
+// function displayHourlyForecast(response) {
+// 	let hourlyForecast = response.data.hourly;
+
+// 	hourlyForecast.forEach(function (hourlyData, index) {
+// 		if (index < 24) {
+// 			let currentHour = document.querySelectorAll('.weather-forecast-time')[
+// 				index
+// 			];
+// 			currentHour.innerHTML = formatHour(hourlyData.dt);
+
+// 			let currentTemp = document.querySelectorAll(
+// 				'.hourly-forecast-temperature'
+// 			)[index];
+// 			currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
+
+// 			let icon = document.querySelectorAll('.hourly-forecast .image')[index];
+// 			icon.setAttribute(
+// 				'src',
+// 				`http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
+// 			);
+// 		}
+// 	});
+// }
+
+// Get Forecast by coordinates
+
+// function getHourlyForecast(coordinates) {
+// 	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
+// 	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+// 	axios.get(apiUrl).then(displayHourlyForecast);
+// }
+
+function getHourlyForecast(coordinates) {
+	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
+	let apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+
+	axios.get(apiUrl).then(displayHourlyForecast);
+}
+
 function displayHourlyForecast(response) {
-	let hourlyForecast = response.data.hourly;
+	let hourlyForecast = response.data.list.slice(0, 7); // Перші 24 години (по 3 години крок)
+	let hourlyElement = document.querySelector('.hourly-forecast');
 
-	hourlyForecast.forEach(function (hourlyData, index) {
-		if (index < 24) {
-			let currentHour = document.querySelectorAll('.weather-forecast-time')[
-				index
-			];
-			currentHour.innerHTML = formatHour(hourlyData.dt);
+	// Очищення контейнера перед додаванням нового прогнозу
+	hourlyElement.innerHTML = '';
 
-			let currentTemp = document.querySelectorAll(
-				'.hourly-forecast-temperature'
-			)[index];
-			currentTemp.innerHTML = `${Math.round(hourlyData.temp)}°`;
+	hourlyForecast.forEach(function (hourlyData) {
+		let time = formatHour(hourlyData.dt);
+		hourlyElement.innerHTML += `
+     <ul class="time-list">
+		<li class="time-item">
+        <p class="weather-forecast-time">${time}</p>
+        <img
+          src="http://openweathermap.org/img/wn/${
+						hourlyData.weather[0].icon
+					}.png"
+          alt="${hourlyData.weather[0].description}"
+          class="picture animate__animated animate__zoomIn image"
+        />
+        <div class="hourly-forecast-temperature temp-range">${Math.round(
+					hourlyData.main.temp
+				)}°</div>
+      </li>
+			</ul>
+    `;
+	});
+}
 
-			let icon = document.querySelectorAll('.hourly-forecast #image')[index];
-			icon.setAttribute(
-				'src',
-				`http://openweathermap.org/img/wn/${hourlyData.weather[0].icon}.png`
-			);
+function formatHour(timestamp) {
+	let date = new Date(timestamp * 1000);
+	let hours = date.getHours();
+	return `${hours}:00`;
+}
+
+function displayForecast(response) {
+	let forecast = response.data.list; // Масив прогнозу кожні 3 години
+	let forecastElement = document.querySelector('.weekly-forecast');
+
+	// Очищення контейнера перед додаванням нового прогнозу
+	// forecastElement.innerHTML = '';
+
+	// Групування даних для денного прогнозу
+	let dailyForecast = [];
+	forecast.forEach(function (item) {
+		let date = new Date(item.dt * 1000);
+		let hour = date.getHours();
+
+		// Вибираємо значення об 12:00 як денний прогноз
+		if (hour === 12) {
+			dailyForecast.push(item);
+		}
+	});
+
+	dailyForecast.forEach(function (forecastDay, index) {
+		if (index < 6) {
+			forecastElement.innerHTML += `
+			<ul class="time-list">
+        <li class="time-item">
+          <p class="weather-forecast-day">${formatDay(forecastDay.dt)}</p>
+          <img
+            src="http://openweathermap.org/img/wn/${
+							forecastDay.weather[0].icon
+						}.png"
+            alt="${forecastDay.weather[0].description}"
+            class="picture animate__animated animate__zoomIn image"
+          />
+          <div class="temp-range temp-forecast-range">
+            <p class="max">H: ${Math.round(forecastDay.main.temp_max)}°</p>
+            <p class="min">L: ${Math.round(forecastDay.main.temp_min)}°</p>
+          </div>
+        </li>
+				</ul>
+      `;
 		}
 	});
 }
 
-// Get Forecast by coordinates
-
-function getHourlyForecast(coordinates) {
-	let apiKey = '743bee57fddbfaf52447193a87d5dd25';
-	let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
-
-	axios.get(apiUrl).then(displayHourlyForecast);
+function formatDay(timestamp) {
+	let date = new Date(timestamp * 1000);
+	let days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+	return days[date.getDay()];
 }
 
 function formatHour(timestamp) {
@@ -257,7 +355,7 @@ function formatHour(timestamp) {
 }
 
 function currentPosition(position) {
-	let apiKey = '743bee57fddbfaf52447193a87d5dd25';
+	let apiKey = 'f8e6a9e3d6fde87cb38868da460b1371';
 	let lat = position.coords.latitude;
 	let lon = position.coords.longitude;
 	let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
