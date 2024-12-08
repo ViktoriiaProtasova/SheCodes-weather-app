@@ -215,8 +215,7 @@ function displayForecast(response) {
             class="picture animate__animated animate__zoomIn image"
           />
           <div class="temp-range temp-forecast-range">
-            <p class="max">H: ${Math.round(forecastDay.main.temp_max)}°</p>
-            <p class="min">L: ${Math.round(forecastDay.main.temp_min)}°</p>
+            <p class="max">${Math.round(forecastDay.main.temp_max)}°C</p>
           </div>
         </li>
 				</ul>
@@ -246,7 +245,7 @@ function displayHourlyForecast(response) {
         />
         <div class="hourly-forecast-temperature temp-range">${Math.round(
 					hourlyData.main.temp
-				)}°</div>
+				)}°C</div>
       </li>
 			</ul>
     `;
