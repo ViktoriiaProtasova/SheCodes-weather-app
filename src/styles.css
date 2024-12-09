@@ -194,12 +194,17 @@ img {
 	text-transform: none;
 }
 
+.temp-forecast-range {
+	font-size: 0.8rem;
+}
+
 .temp-range {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 15px;
 	margin-bottom: 8px;
+	font-size: 16px;
 	font-weight: bold;
 	font-family: 'Kaushan Script', cursive;
 }
@@ -262,10 +267,6 @@ img {
 	max-width: 100%;
 }
 
-.temp-forecast-range {
-	font-size: 0.8rem;
-}
-
 .current-forecast {
 	display: flex;
 }
@@ -312,6 +313,7 @@ img {
 	.time-item {
 		font-size: 0.75rem;
 	}
+
 	.temp-forecast-range {
 		font-size: 0.6rem;
 	}
